@@ -209,19 +209,130 @@
 
 
 
-let a = new Promise((resolve, reject) => {
-    setTimeout(()=>{
-        resolve(400);
-    }, 2000)
-})
+// let a = ()=>{ return new Promise((resolve, reject) => {
+//     setTimeout(()=>{
+//         resolve(400);
+//     }, 2000)
+// })}
 
-let f = async ()=>{
-    let b = await a;
-    console.log(b);
-    let c = await a;
-    console.log(c);
-    let d = await a;
-    console.log(b, c, d);
+// (async ()=>{          // IIFE Imdeiatly inwoke function expression     (it is used to avoid polluting the golbal namespace, execute an async-await, etc)  this IIFE will execute one time and never call outside the scope
+//     let b = await a();
+//     console.log(b);
+//     let c = await a();
+//     console.log(c);
+//     let d = await a();
+//     console.log(b, c, d);
+// })()
+
+// let arr = [3, 5, 8, 9, 12, 15]; // Destructuring 
+// let [a, b, ...rest] = arr;
+
+// console.log(a, b, rest);
+
+// let [a, , , ...rest] = arr;
+
+// console.log(a,  rest)
+
+// let {a, b} = {a:1, b:5};
+// console.log(a, b);
+
+
+                // Spread Operator
+// let arr1 = [3, 5, 8];
+// let obj1 = {...arr1};
+
+// console.log(obj1);
+
+// function sum(v1, v2, v3){
+//     return v1 + v2 + v3;
+// }
+
+// console.log(sum(...arr1));
+
+// let obj2 = {
+//     name: "Hamza",
+//     company: "Company XYZ",
+//     Address: "xyz"
+// }
+
+// console.log({...obj2, name: "Ameer"}); // Here in this output overriding will occur 
+// console.log({name: "Khan", company: "abc", ...obj2}); // Here overriding will not occur becuase the obj2 comes after the values 
+
+// let arr = [2, 5, 8, "Hamza"];
+
+// console.log(arr);
+
+// {
+//     let a = 10;
+//     console.log(a); // The let and var has the block level scope ({} block scope or local scope)
+// }
+
+// var b = 22;
+// {
+//     var c = 4;
+//     console.log(b);  // var has the global level scope
+// }
+// console.log(c);
+// function ax(){
+//     console.log(b);
+// }
+
+// ax();
+
+
+// Hoisting Concepts   (class expression and function expression cannot hoisted)
+// Following two lines run successfuly due to JavaScript hoisting   var allow hoiting but let/const cannot allow 
+// console.log(a);
+// greet();
+// function greet(){
+//     console.log(`Hello Good Night`);
+// }
+// console.log(a);
+
+// var a = 10; // Declartion hoisted to the top but initiazation is not
+// console.log(a);
+
+
+//Closures Concepts in JavaScript
+
+// message = "Good Global";
+// function hello1(){
+//     let message = "Good Morning";
+//     // {
+//     //     let message = "Good Afternoon";
+//     //     console.log("Hello 1 : " +message);
+//     // }
+//         // let message = "Good Afternoon";
+//         console.log("Hello 1 : " + message);
+
+//     // console.log(message);
+//     let c = function hello2(){
+//         console.log("I am C : " + message);     
+//     }
+//     return c;
+    
+// }
+
+// c = hello1();
+// c();
+
+function returnFunc(){
+const x = ()=>{
+    let a = 1;
+    console.log(a);
+    const y = ()=>{
+        // let a = 2;
+        console.log(a);
+        const z = ()=>{
+            // let a = 3;
+            console.log(a);
+        }
+        z();
+    }
+    a = 999;
+    y();
 }
-
-f();
+ return x;
+}
+let a = returnFunc();
+a();
